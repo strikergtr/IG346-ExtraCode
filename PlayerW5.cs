@@ -33,13 +33,15 @@ public class Player : NetworkBehaviour
     {
         rb.linearVelocity = new Vector3(movement.x, rb.linearVelocityY, 0f);
         GoogleAPI.instance.myplayer.position = transform.position;
+
+        anim.SetInteger("state", state);
     }
 
     public override void FixedUpdateNetwork()
     {
         if (GetInput(out NetworkInputData input))
         {
-            // ·§Ë Host/Client ∑’Ë¡’ InputAuthority ‡∑Ë“π—Èπ∑’Ë®–§ÿ¡µ—«π’È
+            // ‡πÅ‡∏Ñ‡πà Host/Client ‡∏ó‡∏µ‡πà‡∏°‡∏µ InputAuthority ‡πÄ‡∏ó‡πà‡∏≤‡∏ô‡∏±‡πâ‡∏ô‡∏ó‡∏µ‡πà‡∏à‡∏∞‡∏Ñ‡∏∏‡∏°‡∏ï‡∏±‡∏ß‡∏ô‡∏µ‡πâ
             Vector2 velocity = rb.linearVelocity;
             velocity.x = input.horizontal * speed;
 
@@ -63,10 +65,8 @@ public class Player : NetworkBehaviour
             {
                 state = 0;
             }
+            
         }
-        anim.SetInteger("state", state);
-
-        // ??
     }
 
 
